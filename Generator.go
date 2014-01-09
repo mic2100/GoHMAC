@@ -48,24 +48,13 @@ func checkRequirements() {
 }
 
 func encode(uri string, timestamp string) string {
-	var hashA, hashB, hashC string
-
-	hashA = _encode(uri + "@" + timestamp)
-
-	hashB = _encode(config.key)
-
-	hashC = _enc(hashA + "-" + hashB)
-	for i := 0; i < 100; i++ {
-		hashC = _enc(hashC)
-	}
-
-	return hashC
+	return _encode(_encode(uri + "@" + timestamp, 10) + "-" + _encode(config.key, 10), 100)
 }
 
-func _encode(encodedString string) string {
+func _encode(encodedString string, length int) string {
 	output := _enc(encodedString)
-	for i := 0; i < 10; i++ {
-		output = _enc(encodedString)
+	for i := 0; i < length; i++ {
+		output = _enc(output)
 	}
 
 	return output
