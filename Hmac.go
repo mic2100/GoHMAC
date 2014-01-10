@@ -23,20 +23,15 @@ var Hash = hash{hmac: "", uri: "", timestamp: ""}
 
 func checkRequirements(checkHash bool) {
 	if config.algorithm == "" {
-		panic("No algorithm has been set")
-		os.Exit(1)
+		outputError("No algorithm has been set")
 	} else if config.key == "" {
-		panic("No key has been set")
-		os.Exit(1)
+		outputError("No key has been set")
 	} else if checkHash && Hash.hmac == "" {
-		panic("No HMAC has been set")
-		os.Exit(1)
+		outputError("No HMAC has been set")
 	} else if Hash.uri == "" {
-		panic("No URI has been set")
-		os.Exit(1)
+		outputError("No URI has been set")
 	} else if Hash.timestamp == "" {
-		panic("No timestamp has been set")
-		os.Exit(1)
+		outputError("No timestamp has been set")
 	}
 }
 
@@ -58,4 +53,9 @@ func SetAlgorithm(algo string) {
 
 func SetKey(key string) {
 	config.key = key
+}
+
+func outputError(message string) {
+	panic(message)
+	os.Exit(1)
 }
