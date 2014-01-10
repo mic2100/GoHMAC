@@ -8,7 +8,7 @@ func Test_IsSafeToEncode_NoAlgorithm(t *testing.T) {
 	Hash = hash{hmac: "", uri: "", timestamp: ""}
 	config = configuration{algorithm: "", key: ""}
 	passed, failure := isSafeToEncode(false)
-	
+
 	if passed {
 		t.Errorf("Failed to check if the algorithm has been set, the boolean was an incorrect value")
 	}
@@ -86,5 +86,3 @@ func Test_IsSafeToEncode_Passed(t *testing.T) {
 		t.Errorf("Failed to check if the IsSafeToEncode has the correct error message")
 	}
 }
-
-func 
