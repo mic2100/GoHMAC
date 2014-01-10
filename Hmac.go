@@ -1,7 +1,8 @@
 package hmac
 
 import (
-	"os"
+	"fmt"
+	"time"
 )
 
 var key string
@@ -21,21 +22,39 @@ type hash struct {
 
 var Hash = hash{hmac: "", uri: "", timestamp: ""}
 
+type Failure struct {
+	Time    time.Time
+	Message string
+}
+
+func (f Failure) Error() string {
+	return fmt.Sprintf("%v: %v", f.Time, f.Message)
+}
+
 //this is used so the methods can me mocked
 type Encoder func(uri string, timestamp string) string
 
-func checkRequirements(checkHash bool) {
+func isSafeToEncode(checkHash bool) (bool, Failure) {
+	errorMsg := Failure{Time: time.Now(), Message: ""}
+	errorMsg.Time = time.Now()
+	passed := true
 	if config.algorithm == "" {
-		outputError("No algorithm has been set")
+		errorMsg.Message = "No algorithm has been set"
+		passed = false
 	} else if config.key == "" {
-		outputError("No key has been set")
+		errorMsg.Message = "No key has been set"
+		passed = false
 	} else if checkHash && Hash.hmac == "" {
-		outputError("No HMAC has been set")
+		errorMsg.Message = "No HMAC has been set"
+		passed = false
 	} else if Hash.uri == "" {
-		outputError("No URI has been set")
+		errorMsg.Message = "No URI has been set"
+		passed = false
 	} else if Hash.timestamp == "" {
-		outputError("No timestamp has been set")
+		errorMsg.Message = "No timestamp has been set"
+		passed = false
 	}
+	return passed, errorMsg
 }
 
 func SetHmac(hmac string) {
@@ -56,9 +75,4 @@ func SetAlgorithm(algo string) {
 
 func SetKey(key string) {
 	config.key = key
-}
-
-func outputError(message string) {
-	panic(message)
-	os.Exit(1)
 }
