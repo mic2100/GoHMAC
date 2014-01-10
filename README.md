@@ -25,7 +25,7 @@ To generate an HMAC:
     hmac.SetTimestamp(strconv.FormatInt(time.Now().Unix(), 10))
     hmac.SetAlgorithm("sha512") //can be "sha512" or "sha256" more will be added later
     hmac.SetKey("A super secret key!!!") //must be kept secure because this will make everything work
-    hmac.Generate()
+    hmac.Generate(encode)
     generatedHmac := hmac.Hash
     
     fmt.Printf("%+v", generatedHmac)
@@ -46,7 +46,7 @@ To compare an HMAC:
     hmac.SetAlgorithm("sha512")
     hmac.SetKey("A super secret key!!!")
     
-    if hmac.Compare(hmac.Hash) {
+    if hmac.Compare(hmac.Hash, encode) {
         //this hash was invalid
     }
     
