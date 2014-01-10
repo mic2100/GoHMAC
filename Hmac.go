@@ -28,16 +28,14 @@ func checkRequirements(checkHash bool) {
 	} else if config.key == "" {
 		panic("No key has been set")
 		os.Exit(1)
+	} else if checkHash && Hash.hmac == "" {
+		panic("No HMAC has been set")
+		os.Exit(1)
 	} else if Hash.uri == "" {
 		panic("No URI has been set")
 		os.Exit(1)
 	} else if Hash.timestamp == "" {
 		panic("No timestamp has been set")
-		os.Exit(1)
-	}
-
-	if checkHash && Hash.hmac == "" {
-		panic("No HMAC has been set")
 		os.Exit(1)
 	}
 }
