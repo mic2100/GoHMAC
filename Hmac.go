@@ -21,6 +21,9 @@ type hash struct {
 
 var Hash = hash{hmac: "", uri: "", timestamp: ""}
 
+//this is used so the methods can me mocked
+type Encoder func(uri string, timestamp string) string
+
 func checkRequirements(checkHash bool) {
 	if config.algorithm == "" {
 		outputError("No algorithm has been set")

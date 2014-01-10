@@ -2,12 +2,12 @@ package hmac
 
 //Compares the HMAC in the header with the one that is generated, also checks
 //to make sure that the HMAC key was generated within the expiry time
-func Compare(currentHmac hash) bool {
+func Compare(currentHmac hash, encoder Encoder) bool {
 	SetUri(currentHmac.uri)
 	SetTimestamp(currentHmac.timestamp)
 	SetAlgorithm(config.algorithm)
 	SetKey(config.key)
-	Generate()
+	Generate(encoder)
 
 	//does the generated HMAC differ from the current HMAC, if so return false
 	if Hash.hmac != currentHmac.hmac {
