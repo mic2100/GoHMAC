@@ -8,19 +8,19 @@ import (
 var key string
 
 type configuration struct {
-	algorithm string
-	key       string
+	Algorithm string
+	Key       string
 }
 
-var config configuration = configuration{algorithm: "", key: ""}
+var config configuration = configuration{Algorithm: "", Key: ""}
 
 type hash struct {
-	hmac      string
-	uri       string
-	timestamp string
+	Hmac      string
+	Uri       string
+	Timestamp string
 }
 
-var Hash = hash{hmac: "", uri: "", timestamp: ""}
+var Hash = hash{Hmac: "", Uri: "", Timestamp: ""}
 
 type Failure struct {
 	Time    time.Time
@@ -38,19 +38,19 @@ func isSafeToEncode(checkHash bool) (bool, Failure) {
 	errorMsg := Failure{Time: time.Now(), Message: ""}
 	errorMsg.Time = time.Now()
 	passed := true
-	if config.algorithm == "" {
+	if config.Algorithm == "" {
 		errorMsg.Message = "No algorithm has been set"
 		passed = false
-	} else if config.key == "" {
+	} else if config.Key == "" {
 		errorMsg.Message = "No key has been set"
 		passed = false
-	} else if checkHash && Hash.hmac == "" {
+	} else if checkHash && Hash.Hmac == "" {
 		errorMsg.Message = "No HMAC has been set"
 		passed = false
-	} else if Hash.uri == "" {
+	} else if Hash.Uri == "" {
 		errorMsg.Message = "No URI has been set"
 		passed = false
-	} else if Hash.timestamp == "" {
+	} else if Hash.Timestamp == "" {
 		errorMsg.Message = "No timestamp has been set"
 		passed = false
 	}
@@ -58,21 +58,21 @@ func isSafeToEncode(checkHash bool) (bool, Failure) {
 }
 
 func SetHmac(hmac string) {
-	Hash.hmac = hmac
+	Hash.Hmac = hmac
 }
 
 func SetUri(uri string) {
-	Hash.uri = uri
+	Hash.Uri = uri
 }
 
 func SetTimestamp(ts string) {
-	Hash.timestamp = ts
+	Hash.Timestamp = ts
 }
 
 func SetAlgorithm(algo string) {
-	config.algorithm = algo
+	config.Algorithm = algo
 }
 
 func SetKey(key string) {
-	config.key = key
+	config.Key = key
 }

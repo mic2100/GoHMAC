@@ -9,5 +9,5 @@ func Generate(encoder Encoder) {
 		panic(failure.Error())
 		os.Exit(1)
 	}
-	Hash.hmac = encoder(Hash.uri, Hash.timestamp)
+	Hash.Hmac = encoder(Hash.Uri, Hash.Timestamp)
 }

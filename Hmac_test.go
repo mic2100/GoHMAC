@@ -5,8 +5,8 @@ import (
 )
 
 func Test_IsSafeToEncode_NoAlgorithm(t *testing.T) {
-	Hash = hash{hmac: "", uri: "", timestamp: ""}
-	config = configuration{algorithm: "", key: ""}
+	Hash = hash{Hmac: "", Uri: "", Timestamp: ""}
+	config = configuration{Algorithm: "", Key: ""}
 	passed, failure := isSafeToEncode(false)
 
 	if passed {
@@ -19,8 +19,8 @@ func Test_IsSafeToEncode_NoAlgorithm(t *testing.T) {
 }
 
 func Test_IsSafeToEncode_NoKey(t *testing.T) {
-	Hash = hash{hmac: "", uri: "", timestamp: ""}
-	config = configuration{algorithm: "sha512", key: ""}
+	Hash = hash{Hmac: "", Uri: "", Timestamp: ""}
+	config = configuration{Algorithm: "sha512", Key: ""}
 	passed, failure := isSafeToEncode(false)
 
 	if passed {
@@ -33,8 +33,8 @@ func Test_IsSafeToEncode_NoKey(t *testing.T) {
 }
 
 func Test_IsSafeToEncode_NoHmac(t *testing.T) {
-	Hash = hash{hmac: "", uri: "", timestamp: ""}
-	config = configuration{algorithm: "sha512", key: "12345"}
+	Hash = hash{Hmac: "", Uri: "", Timestamp: ""}
+	config = configuration{Algorithm: "sha512", Key: "12345"}
 	passed, failure := isSafeToEncode(true)
 	if passed {
 		t.Errorf("Failed to check if the HMAC has been set, the boolean was an incorrect value")
@@ -46,8 +46,8 @@ func Test_IsSafeToEncode_NoHmac(t *testing.T) {
 }
 
 func Test_IsSafeToEncode_NoUri(t *testing.T) {
-	Hash = hash{hmac: "54321", uri: "", timestamp: ""}
-	config = configuration{algorithm: "sha512", key: "12345"}
+	Hash = hash{Hmac: "54321", Uri: "", Timestamp: ""}
+	config = configuration{Algorithm: "sha512", Key: "12345"}
 	passed, failure := isSafeToEncode(false)
 
 	if passed {
@@ -60,8 +60,8 @@ func Test_IsSafeToEncode_NoUri(t *testing.T) {
 }
 
 func Test_IsSafeToEncode_NoTimestamp(t *testing.T) {
-	Hash = hash{hmac: "54321", uri: "/home", timestamp: ""}
-	config = configuration{algorithm: "sha512", key: "12345"}
+	Hash = hash{Hmac: "54321", Uri: "/home", Timestamp: ""}
+	config = configuration{Algorithm: "sha512", Key: "12345"}
 	passed, failure := isSafeToEncode(false)
 
 	if passed {
@@ -74,8 +74,8 @@ func Test_IsSafeToEncode_NoTimestamp(t *testing.T) {
 }
 
 func Test_IsSafeToEncode_Passed(t *testing.T) {
-	Hash = hash{hmac: "54321", uri: "/home", timestamp: "1234567890"}
-	config = configuration{algorithm: "sha512", key: "12345"}
+	Hash = hash{Hmac: "54321", Uri: "/home", Timestamp: "1234567890"}
+	config = configuration{Algorithm: "sha512", Key: "12345"}
 	passed, failure := isSafeToEncode(false)
 
 	if !passed {
