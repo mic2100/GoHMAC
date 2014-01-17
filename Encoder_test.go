@@ -12,7 +12,7 @@ func Test_Encoder(t *testing.T) {
 
 	now := "1389349028"
 	uri := "/home"
-	encodedString := encoder(uri, now)
+	encodedString := Encode(uri, now)
 
 	//this value will need to be recalculated if the encode method is modified
 	hmacValue := "3f74e1d499ae2aea80cbbb86aa3923bfda19417e45149fb7ad474ce5143048f2dd594868d82796a9e90f2052c852850558874125b2924ffdf9a54b65f7e676ef"
@@ -36,7 +36,7 @@ func Benchmark_Encoder(b *testing.B) {
 	uri := "/home"
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		encoder(uri, now)
+		Encode(uri, now)
 	}
 }
 

@@ -7,7 +7,7 @@ import (
 )
 
 //Encodes the HMAC based on the URI, Timestamp and Key
-func encoder(uri string, timestamp string) string {
+func Encode(uri string, timestamp string) string {
 	return _encode(_encode(uri+"@"+timestamp, 10)+"-"+_encode(config.key, 10), 100)
 }
 

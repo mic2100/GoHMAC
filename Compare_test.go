@@ -13,11 +13,11 @@ func Test_CompareFalse(t *testing.T) {
 	SetTimestamp(now)
 	SetAlgorithm(algo)
 	SetKey(key)
-	Generate(encoder)
+	Generate(Encode)
 
 	SetHmac("12345")
 
-	result := Compare(Hash, encoder)
+	result := Compare(Hash, Encode)
 
 	if result {
 		t.Errorf("Campare is true when it should be false (%+v)", Hash)
@@ -34,9 +34,9 @@ func Test_ComapreTrue(t *testing.T) {
 	SetTimestamp(now)
 	SetAlgorithm(algo)
 	SetKey(key)
-	Generate(encoder)
+	Generate(Encode)
 
-	result := Compare(Hash, encoder)
+	result := Compare(Hash, Encode)
 
 	if !result {
 		t.Errorf("Campare is false when it should be true (%+v)", Hash)
