@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"crypto/sha512"
 	"fmt"
+	"hash"
 )
 
 //Encodes the HMAC based on the URI, Timestamp and Key
@@ -26,14 +27,15 @@ func _enc(value string) string {
 	var encodedString string
 	switch config.Algorithm {
 	case "sha512":
-		hasher := sha512.New()
-		hasher.Write([]byte(value))
-		encodedString = fmt.Sprintf("%x", hasher.Sum(nil))
+		encodedString = _hash(sha512.New(), value)
 	case "sha256":
-		hasher := sha256.New()
-		hasher.Write([]byte(value))
-		encodedString = fmt.Sprintf("%x", hasher.Sum(nil))
+		encodedString = _hash(sha256.New(), value)
 	}
 
 	return encodedString
+}
+
+func _hash(hasher hash.Hash, value string) string {
+	hasher.Write([]byte(value))
+	return fmt.Sprintf("%x", hasher.Sum(nil))
 }

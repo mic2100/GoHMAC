@@ -14,13 +14,13 @@ type configuration struct {
 
 var config configuration = configuration{Algorithm: "", Key: ""}
 
-type hash struct {
+type Message struct {
 	Hmac      string
 	Uri       string
 	Timestamp string
 }
 
-var Hash = hash{Hmac: "", Uri: "", Timestamp: ""}
+var Hash = Message{Hmac: "", Uri: "", Timestamp: ""}
 
 type Failure struct {
 	Time    time.Time
